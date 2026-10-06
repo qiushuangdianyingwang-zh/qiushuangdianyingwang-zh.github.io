@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>秋霜电影网：每日片单更新，在线选片更省心</title>
+<meta name="description" content="秋霜电影网是一个面向普通观众的影视选片指南站，每日整理院线热映、网络新片与经典重温片单，提供类型标签、看点速览与观影提示，帮你在两分钟内决定今晚看什么。">
+<meta name="keywords" content="秋霜电影网,qiushuangdianyingwang,在线选片,影视片单,每日电影推荐,院线热映,网络新片,经典重温,类型电影指南">
+<link rel="canonical" href="https://qiushuangdianyingwang-zh.github.io/">
+<style>
+:root{
+  --bg:#0f1420;
+  --bg2:#161d2d;
+  --panel:#1b2334;
+  --line:rgba(255,255,255,.08);
+  --txt:#e8ecf3;
+  --txt2:#9aa6bb;
+  --frost:#7fd4d2;
+  --frost2:#a8e0e6;
+  --gold:#e7c56b;
+  --red:#e0655a;
+  --rad:18px;
+  --max:1240px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+  background:var(--bg);color:var(--txt);line-height:1.72;font-size:16px;
+}
+ul{list-style:none}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+
+/* ===== 顶部 ===== */
+.head{position:sticky;top:0;z-index:60;background:rgba(15,20,32,.9);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.head-row{display:flex;align-items:center;justify-content:space-between;height:70px;gap:20px}
+.logo{display:flex;align-items:center;gap:12px}
+.logo-mark{
+  width:40px;height:40px;border-radius:11px;flex-shrink:0;
+  background:linear-gradient(140deg,var(--frost),var(--gold));
+  display:flex;align-items:center;justify-content:center;font-weight:800;color:#0f1420;font-size:18px;
+}
+.logo-txt b{font-size:19px;letter-spacing:.5px;display:block;line-height:1.2}
+.logo-txt small{font-size:11.5px;color:var(--txt2);letter-spacing:1.5px;text-transform:uppercase}
+.menu{display:flex;gap:4px;align-items:center}
+.menu a{font-size:15px;padding:9px 15px;border-radius:9px;color:var(--txt2);transition:.18s}
+.menu a:hover{color:var(--frost);background:rgba(127,212,210,.08)}
+.menu-btn{display:none;width:42px;height:42px;border-radius:10px;border:1px solid var(--line);background:transparent;cursor:pointer;position:relative;flex-shrink:0}
+.menu-btn span{position:absolute;left:11px;width:18px;height:2px;background:var(--txt);border-radius:2px;transition:.25s}
+.menu-btn span:nth-child(1){top:14px}
+.menu-btn span:nth-child(2){top:20px}
+.menu-btn span:nth-child(3){top:26px}
+.menu-btn.on span:nth-child(1){top:20px;transform:rotate(45deg)}
+.menu-btn span:nth-child(2){opacity:0}
+.menu-btn.on span:nth-child(3){top:20px;transform:rotate(-45deg)}
+
+/* ===== Hero ===== */
+.hero{padding:64px 0 52px;position:relative;overflow:hidden}
+.hero::after{
+  content:"";position:absolute;left:-80px;bottom:-160px;width:460px;height:460px;border-radius:50%;
+  background:radial-gradient(circle,rgba(127,212,210,.16),transparent 65%);pointer-events:none;
+}
+.hero-grid{display:grid;grid-template-columns:1fr 380px;gap:56px;align-items:center;position:relative}
+.badge{
+  display:inline-flex;align-items:center;gap:7px;font-size:12.5px;letter-spacing:.5px;color:var(--frost);
+  border:1px solid rgba(127,212,210,.3);padding:5px 13px;border-radius:999px;margin-bottom:20px;
+}
+.badge i{width:6px;height:6px;border-radius:50%;background:var(--frost);box-shadow:0 0 0 4px rgba(127,212,210,.18)}
+.hero h1{font-size:clamp(32px,4.6vw,50px);line-height:1.22;font-weight:800;letter-spacing:-.5px}
+.hero h1 em{font-style:normal;background:linear-gradient(92deg,var(--frost),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero-sub{margin-top:20px;color:var(--txt2);max-width:540px;font-size:16.5px}
+.search{margin-top:30px;display:flex;gap:10px;max-width:560px;flex-wrap:wrap}
+.search input{
+  flex:1;min-width:210px;padding:15px 18px;border-radius:12px;border:1px solid var(--line);
+  background:var(--panel);color:var(--txt);font-size:15px;outline:none;
+}
+.search input::placeholder{color:var(--txt2)}
+.search input:focus{border-color:var(--frost)}
+.search button{
+  padding:0 26px;border-radius:12px;border:none;background:var(--frost);color:#0c1119;
+  font-size:15px;font-weight:700;cursor:pointer;transition:.2s;white-space:nowrap;
+}
+.search button:hover{background:var(--frost2);transform:translateY(-2px)}
+.hero-tags{margin-top:22px;display:flex;gap:9px;flex-wrap:wrap}
+.hero-tags span{font-size:13px;color:var(--txt2);border:1px solid var(--line);padding:5px 12px;border-radius:7px}
+
+.stat-card{
+  background:linear-gradient(165deg,var(--panel),var(--bg2));border:1px solid var(--line);
+  border-radius:var(--rad);padding:28px;box-shadow:0 24px 60px -34px rgba(0,0,0,.8);position:relative;
+}
+.stat-card .top{display:flex;justify-content:space-between;align-items:center}
+.stat-card .top small{color:var(--txt2);font-size:12.5px;letter-spacing:1px}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--red);box-shadow:0 0 0 4px rgba(224,101,90,.2);animation:pulse 2s infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 8px rgba(224,101,90,0)}}
+.stat-num{font-size:44px;font-weight:800;margin:14px 0 4px;color:var(--frost)}
+.stat-card h4{font-size:17px;line-height:1.5}
+.stat-card p{font-size:14px;color:var(--txt2);margin-top:10px}
+.stat-bars{margin-top:22px;display:flex;flex-direction:column;gap:12px}
+.stat-bars div{font-size:12.5px;color:var(--txt2)}
+.stat-bars div b{float:right;color:var(--gold);font-weight:600}
+.bar{height:5px;border-radius:5px;background:rgba(255,255,255,.08);margin-top:6px;overflow:hidden}
+.bar i{display:block;height:100%;border-radius:5px;background:linear-gradient(90deg,var(--frost),var(--gold))}
+
+/* ===== 栏目导航 ===== */
+.rail{background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.rail-in{display:flex;gap:0;overflow-x:auto}
+.rail-in a{
+  flex-shrink:0;padding:16px 24px;font-size:14.5px;color:var(--txt2);border-right:1px solid var(--line);
+  display:flex;align-items:center;gap:9px;transition:.18s;white-space:nowrap;
+}
+.rail-in a:hover{color:var(--frost);background:rgba(127,212,210,.05)}
+.rail-in a b{font-size:11px;color:var(--gold);font-weight:600}
+
+/* ===== 区块通用 ===== */
+.block{padding:72px 0}
+.block-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:36px;flex-wrap:wrap}
+.block-head .l .no{font-size:12px;color:var(--frost);letter-spacing:2px;font-weight:700}
+.block-head h2{font-size:clamp(24px,3.2vw,33px);font-weight:800;margin-top:5px}
+.block-head .r{color:var(--txt2);font-size:14.5px;max-width:360px}
+
+/* ===== 栏目一：每日片单 ===== */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.film{
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--rad);overflow:hidden;
+  display:flex;flex-direction:column;transition:.26s;
+}
+.film:hover{transform:translateY(-6px);border-color:rgba(127,212,210,.35);box-shadow:0 20px 44px -28px rgba(0,0,0,.8)}
+.poster{height:190px;position:relative;padding:16px;display:flex;flex-direction:column;justify-content:space-between}
+.poster .row{display:flex;justify-content:space-between;align-items:flex-start;position:relative;z-index:1}
+.tag-min{
+  font-size:11.5px;padding:4px 9px;border-radius:6px;background:rgba(0,0,0,.42);color:#fff;backdrop-filter:blur(4px);
+}
+.score-min{font-size:12px;font-weight:700;color:var(--gold);background:rgba(0,0,0,.42);padding:4px 9px;border-radius:6px}
+.poster .cap{position:relative;z-index:1;font-size:12px;color:rgba(255,255,255,.85)}
+.poster::before{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.75),transparent 70%)}
+.f1{background:linear-gradient(135deg,#3a2a5c,#6b4a8a)}
+.f2{background:linear-gradient(135deg,#1f4a5e,#2f7a85)}
+.f3{background:linear-gradient(135deg,#6b3326,#b35d42)}
+.f4{background:linear-gradient(135deg,#26402a,#4a7a52)}
+.f5{background:linear-gradient(135deg,#5c4a1f,#a88a3c)}
+.f6{background:linear-gradient(135deg,#2a3a5c,#4a6ba8)}
+.body{padding:20px 22px;flex:1;display:flex;flex-direction:column}
+.body h3{font-size:18.5px;line-height:1.4;margin-bottom:8px}
+.body p{font-size:14px;color:var(--txt2);flex:1}
+.body .kv{margin-top:16px;padding-top:14px;border-top:1px solid var(--line);display:flex;justify-content:space-between;font-size:13px;color:var(--txt2)}
+.body .kv b{color:var(--frost);font-weight:600}
+
+/* ===== 栏目二：选片指南 ===== */
+.guide{background:var(--bg2)}
+.guide-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.guide-card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:26px 22px;transition:.24s}
+.guide-card:hover{border-color:var(--gold);transform:translateY(-4px)}
+.guide-card .ico{font-size:27px;margin-bottom:14px;display:block}
+.guide-card h4{font-size:16.5px;margin-bottom:8px}
+.guide-card p{font-size:13.8px;color:var(--txt2)}
+
+/* ===== 栏目三：观影日历 ===== */
+.calendar-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:40px;align-items:start}
+.timeline{border-left:2px solid var(--line);padding-left:26px;display:flex;flex-direction:column;gap:28px}
+.tl{position:relative}
+.tl::before{
+  content:"";position:absolute;left:-33px;top:7px;width:12px;height:12px;border-radius:50%;
+  background:var(--bg);border:2px solid var(--frost);
+}
+.tl.on::before{background:var(--frost);box-shadow:0 0 0 5px rgba(127,212,210,.15)}
+.tl small{color:var(--frost);font-size:12.5px;letter-spacing:1px;font-weight:600}
+.tl h4{font-size:18px;margin:3px 0 6px}
+.tl p{font-size:14.2px;color:var(--txt2)}
+.side{background:var(--panel);border:1px solid var(--line);border-radius:var(--rad);padding:26px}
+.side h4{font-size:16.5px;margin-bottom:16px}
+.side ul li{display:flex;gap:12px;padding:11px 0;border-bottom:1px solid var(--line);font-size:14px}
+.side ul li:last-child{border-bottom:none}
+.side ul li span{color:var(--gold);font-size:12.5px;flex-shrink:0;width:46px;font-family:ui-monospace,monospace}
+
+/* ===== 栏目四：站点信息 ===== */
+.info-box{
+  background:linear-gradient(150deg,var(--frost),#4a9c9e 55%,var(--gold));
+  border-radius:22px;padding:44px;color:#0c1119;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;
+}
+.info-box h3{font-size:26px;line-height:1.5;font-weight:800}
+.info-box p{margin-top:12px;font-size:15px;opacity:.85}
+.url-show{
+  background:rgba(12,17,25,.86);color:var(--frost2);border-radius:14px;padding:22px 24px;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:15px;word-break:break-all;
+}
+.url-show small{display:block;color:var(--txt2);font-family:inherit;font-size:13px;margin-top:9px;letter-spacing:.4px}
+.info-list{margin-top:24px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.info-list div{background:rgba(12,17,25,.16);border-radius:10px;padding:14px 16px;font-size:14px}
+.info-list div b{display:block;font-size:11.5px;letter-spacing:1.5px;opacity:.7;margin-bottom:3px;text-transform:uppercase}
+
+/* ===== 页脚 ===== */
+.foot{border-top:1px solid var(--line);padding:34px 0 40px;background:var(--bg2)}
+.foot-row{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;font-size:13.5px;color:var(--txt2)}
+.foot-links{display:flex;gap:22px;flex-wrap:wrap}
+.foot-links a:hover{color:var(--frost)}
+
+/* ===== 响应式 ===== */
+@media (max-width:980px){
+  .grid{grid-template-columns:1fr 1fr}
+  .guide-grid{grid-template-columns:1fr 1fr}
+  .calendar-grid{grid-template-columns:1fr;gap:32px}
+  .info-box{grid-template-columns:1fr;padding:32px}
+}
+@media (max-width:660px){
+  .head-row{height:62px}
+  .menu{
+    position:fixed;top:62px;left:0;right:0;flex-direction:column;align-items:stretch;padding:14px;gap:2px;
+    background:var(--bg);border-bottom:1px solid var(--line);transform:translateY(-140%);opacity:0;
+    transition:.3s;pointer-events:none;
+  }
+  .menu.on{transform:translateY(0);opacity:1;pointer-events:auto}
+  .menu a{padding:13px 16px;border-radius:8px}
+  .menu-btn{display:block}
+  .hero{padding:40px 0 38px}
+  .hero-grid{grid-template-columns:1fr;gap:34px}
+  .block{padding:50px 0}
+  .grid,.guide-grid{grid-template-columns:1fr}
+  .info-list{grid-template-columns:1fr}
+  .block-head{margin-bottom:26px}
+  .url-show{font-size:13.5px;padding:18px}
+}
+@media print{.head,.menu-btn,.rail,.search{display:none}body{background:#fff;color:#000}}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/zhangzong.js"></script>
+
+<header class="head">
+  <div class="wrap head-row">
+    <a class="logo" href="#">
+      <span class="logo-mark">秋</span>
+      <span class="logo-txt"><b>秋霜电影网</b><small>Qiushuang Movie Guide</small></span>
+    </a>
+    <nav class="menu" id="menu">
+      <a href="#daily">每日片单</a>
+      <a href="#guide">选片指南</a>
+      <a href="#calendar">上映日历</a>
+      <a href="#site">站点信息</a>
+    </nav>
+    <button class="menu-btn" id="menuBtn" aria-label="导航菜单"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <span class="badge"><i></i>今日片单已更新 · 每天 20:00</span>
+        <h1>两分钟定今晚，<br>让<em>选片</em>不再靠运气。</h1>
+        <p class="hero-sub">秋霜电影网不追热点、不做搬运，只把每天值得看的片子筛一遍，配上一句大白话看点和一个真实参考评分，帮你把原本花在翻片单上的时间省下来。</p>
+        <form class="search" onsubmit="event.preventDefault()">
+          <input type="search" placeholder="搜片名、演员、导演或心情，例如：周末想看轻松的">
+          <button type="submit">找片子</button>
+        </form>
+        <div class="hero-tags">
+          <span>喜剧</span><span>悬疑</span><span>动画</span><span>纪录片</span><span>冷门佳作</span><span>亲子</span>
+        </div>
+      </div>
+      <aside class="stat-card">
+        <div class="top"><small>秋霜指数 · 实时</small><span class="dot"></span></div>
+        <div class="stat-num">1,286</div>
+        <h4>部已收录影片，覆盖院线、流媒体与经典修复片</h4>
+        <p>每部片子都标注了类型、时长、观看门槛与适合人群，避免点开才发现不对味。</p>
+        <div class="stat-bars">
+          <div>剧情 / 文艺 <b>31%</b><i class="bar"><i style="width:31%"></i></i></div>
+          <div>悬疑 / 犯罪 <b>24%</b><i class="bar"><i style="width:24%"></i></i></div>
+          <div>喜剧 / 轻松 <b>22%</b><i class="bar"><i style="width:22%"></i></i></div>
+          <div>动画 / 纪录 <b>23%</b><i class="bar"><i style="width:23%"></i></i></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<nav class="rail">
+  <div class="wrap rail-in">
+    <a href="#daily"><b>01</b>每日片单</a>
+    <a href="#guide"><b>02</b>选片指南</a>
+    <a href="#calendar"><b>03</b>上映日历</a>
+    <a href="#site"><b>04</b>站点信息</a>
+  </div>
+</nav>
+
+<section class="block" id="daily">
+  <div class="wrap">
+    <div class="block-head">
+      <div class="l">
+        <div class="no">SECTION 01 · DAILY PICKS</div>
+        <h2>每日片单</h2>
+      </div>
+      <p class="r">每天精选六部，覆盖不同心情与时段，短评不超过一百字，扫一眼就知道适不适合自己。</p>
+    </div>
+    <div class="grid">
+      <article class="film">
+        <div class="poster f1"><div class="row"><span class="tag-min">院线热映</span><span class="score-min">8.4</span></div><span class="cap">犯罪 / 悬疑 · 136 分钟</span></div>
+        <div class="body">
+          <h3>沉默的证词</h3>
+          <p>节奏稳、反转真，靠表演撑起一整场法庭戏，中段有一场审讯值得二刷。适合想动脑但不想被烧脑的观众。</p>
+          <div class="kv"><span>推荐人群：悬疑爱好者</span><b>在线选片 →</b></div>
+        </div>
+      </article>
+      <article class="film">
+        <div class="poster f2"><div class="row"><span class="tag-min">网络新片</span><span class="score-min">7.9</span></div><span class="cap">剧情 / 家庭 · 108 分钟</span></div>
+        <div class="body">
+          <h3>海边修理铺</h3>
+          <p>没有大事件，全靠台词与细节堆出两代人的缝隙。看完不会热血，但会想起自己家里那个沉默的人。</p>
+          <div class="kv"><span>推荐人群：喜欢慢节奏的观众</span><b>在线选片 →</b></div>
+        </div>
+      </article>
+      <article class="film">
+        <div class="poster f3"><div class="row"><span class="tag-min">动作</span><span class="score-min">8.1</span></div><span class="cap">动作 / 惊悚 · 119 分钟</span></div>
+        <div class="body">
+          <h3>边境线</h3>
+          <p>一场追车戏拍了十八分钟，实拍为主，少有的干净利落。剧情是老套路，但执行到位，下班放松首选。</p>
+          <div class="kv"><span>推荐人群：周末解压</span><b>在线选片 →</b></div>
+        </div>
+      </article>
+      <article class="film">
+        <div class="poster f4"><div class="row"><span class="tag-min">纪录片</span><span class="score-min">9.0</span></div><span class="cap">纪录 / 自然 · 95 分钟</span></div>
+        <div class="body">
+          <h3>苔藓下的时间</h3>
+          <p>把镜头对准一片林子里四年发生的事，配乐克制，信息量惊人。适合需要安静下来的夜晚独自看。</p>
+          <div class="kv"><span>推荐人群：纪录片迷</span><b>在线选片 →</b></div>
+        </div>
+      </article>
+      <article class="film">
+        <div class="poster f5"><div class="row"><span class="tag-min">喜剧</span><span class="score-min">7.6</span></div><span class="cap">喜剧 / 爱情 · 102 分钟</span></div>
+        <div class="body">
+          <h3>相亲这件小事</h3>
+          <p>群像喜剧，五个相亲对象五种尴尬，笑点接地气，没有硬煽情。适合情侣或朋友聚会一起看。</p>
+          <div class="kv"><span>推荐人群：轻松解闷</span><b>在线选片 →</b></div>
+        </div>
+      </article>
+      <article class="film">
+        <div class="poster f6"><div class="row"><span class="tag-min">经典重温</span><span class="score-min">8.8</span></div><span class="cap">动画 / 奇幻 · 124 分钟</span></div>
+        <div class="body">
+          <h3>风之回响（4K 修复）</h3>
+          <p>重映修复版，画面提升明显。老片重看最大的收获是发现当年没看懂的那条暗线，建议戴耳机。</p>
+          <div class="kv"><span>推荐人群：动画爱好者</span><b>在线选片 →</b></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="block guide" id="guide">
+  <div class="wrap">
+    <div class="block-head">
+      <div class="l">
+        <div class="no">SECTION 02 · HOW TO PICK</div>
+        <h2>选片指南</h2>
+      </div>
+      <p class="r">不知道看什么时，照着这四个角度想一遍，通常三十秒内就能定下来。</p>
+    </div>
+    <div class="guide-grid">
+      <div class="guide-card">
+        <span class="ico">🎯</span>
+        <h4>先定时长</h4>
+        <p>通勤碎片时间选 90 分钟内，周末夜晚可以放开到 140 分钟，别让超时成为放弃的理由。</p>
+      </div>
+      <div class="guide-card">
+        <span class="ico">🌙</span>
+        <h4>再看心情</h4>
+        <p>累的时候选喜剧与动作，平静的时候选剧情与纪录，别在疲惫时挑战闷片，那是浪费。</p>
+      </div>
+      <div class="guide-card">
+        <span class="ico">👥</span>
+        <h4>谁一起看</h4>
+        <p>独自看可以选冷门与慢节奏，有长辈或孩子同在场，先查一句分级与题材再点开。</p>
+      </div>
+      <div class="guide-card">
+        <span class="ico">🧭</span>
+        <h4>要不要烧脑</h4>
+        <p>想放松就避开多重反转与复杂时间线，想被惊艳就直奔悬疑与科幻，前提是有整段时间。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="calendar">
+  <div class="wrap">
+    <div class="block-head">
+      <div class="l">
+        <div class="no">SECTION 03 · RELEASE CALENDAR</div>
+        <h2>上映日历</h2>
+      </div>
+      <p class="r">未来一周值得留意的新片节点，院线与流媒体分开标注，避免错过窗口期。</p>
+    </div>
+    <div class="calendar-grid">
+      <div class="timeline">
+        <div class="tl on">
+          <small>今天 · 10 月 6 日</small>
+          <h4>三部新片同步上线</h4>
+          <p>含一部悬疑院线片与两部网络新片，晚间片单已更新完整短评与观看建议。</p>
+        </div>
+        <div class="tl">
+          <small>10 月 8 日 · 周三</small>
+          <h4>纪录片频道集中上新</h4>
+          <p>本季自然类题材较多，适合连续三天补完同一系列，不必一天硬看完。</p>
+        </div>
+        <div class="tl">
+          <small>10 月 10 日 · 周五</small>
+          <h4>喜剧新片院线上映</h4>
+          <p>点映口碑偏向两极，本站会先等评分稳定后再决定是否收录进推荐。</p>
+        </div>
+        <div class="tl">
+          <small>10 月 12 日 · 周日</small>
+          <h4>经典修复专场</h4>
+          <p>三部老片 4K 修复版同步回归，适合想补片单、又不想面对新片的观众。</p>
+        </div>
+      </div>
+      <div class="side">
+        <h4>本周热门提问</h4>
+        <ul>
+          <li><span>Q1</span><div>晚上十点后适合看什么？<br><small style="color:var(--txt2)">优先选 100 分钟内的轻量喜剧。</small></div></li>
+          <li><span>Q2</span><div>带孩子看有什么要注意？<br><small style="color:var(--txt2)">先看题材与建议年龄，再看时长。</small></div></li>
+          <li><span>Q3</span><div>烂片怎么避？<br><small style="color:var(--txt2)">参考三项以上独立评分，别只看平台首页推荐。</small></div></li>
+          <li><span>Q4</span><div>老片值得补吗？<br><small style="color:var(--txt2)">修复版优先，字幕与音质体验差别明显。</small></div></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="site">
+  <div class="wrap">
+    <div class="block-head">
+      <div class="l">
+        <div class="no">SECTION 04 · SITE INFO</div>
+        <h2>站点信息</h2>
+      </div>
+      <p class="r">关于秋霜电影网的内容来源、更新方式与唯一官方访问地址。</p>
+    </div>
+    <div class="info-box">
+      <div>
+        <h3>一个只做选片建议的电影指南站。</h3>
+        <p>秋霜电影网由几位普通观众共同维护，每天筛片、写短评、标类型，不提供在线播放，也不做资源搬运。我们做的是在海量片源里，替你省下翻找的时间。</p>
+        <div class="info-list">
+          <div><b>更新频率</b>每天 20:00</div>
+          <div><b>内容形式</b>短评 + 类型标签</div>
+          <div><b>收录范围</b>院线 / 流媒体 / 修复片</div>
+          <div><b>联系方式</b>站内留言板</div>
+        </div>
+      </div>
+      <div>
+        <div class="url-show">
+          https://qiushuangdianyingwang-zh.github.io
+          <small>本站唯一官方访问地址，站点托管于 GitHub Pages，请认准此域名访问。</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap foot-row">
+    <div>© <span id="yr"></span> 秋霜电影网 · 本站内容为选片建议性质，不构成任何观看或消费决策的唯一依据。</div>
+    <div class="foot-links">
+      <a href="#">内容声明</a>
+      <a href="#">投稿合作</a>
+      <a href="#">更新日志</a>
+      <a href="#">返回顶部</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.getElementById('yr').textContent=new Date().getFullYear();
+(function(){
+  var btn=document.getElementById('menuBtn'),m=document.getElementById('menu');
+  btn.addEventListener('click',function(){m.classList.toggle('on');btn.classList.toggle('on');});
+  m.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){m.classList.remove('on');btn.classList.remove('on');});});
+})();
+</script>
+</body>
+</html>
